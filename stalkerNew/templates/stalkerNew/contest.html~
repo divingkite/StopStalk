@@ -1,0 +1,15 @@
+<html>
+<style>
+select{
+width : 300px;
+}
+<form action="{% url  'stalker:list_for_a_contest' %}">
+</style>
+<select>
+        {% for contest in contests %}
+            <option name='contest' value= "{{ contest }}">{{ contest }}</option>     
+        {% endfor %}
+</select>
+<input type="submit" value="GO" >
+</form>
+</html>

@@ -1,0 +1,14 @@
+<h5><strong>Enter Your Credentials</strong></h5>
+
+{% if error_message %}<h4><strong>{{error_message}}</strong></h4>{% endif %} 
+
+<form method="post" action=".">
+{% csrf_token %}
+Enter your E-mail id : <input type="text" name="username" placeholder="your username">
+</br>
+Enter your Password: <input type="password" name="password">
+</br>
+{% if wrong_password_message %}<h4><strong>{{ wrong_password_message}}</strong></h4>{% endif %} 
+<input type="submit" />
+<!--  submit was written -->
+</form>

@@ -1,0 +1,72 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'stalkerNew/profile.css' %}" />
+
+{% extends 'stalkerNew/base.html' %}
+<meta  content="text/html; charset=UTF-8" author="divingkite">
+{% block content %}
+<h3>Codechef</h3>
+
+<table border="1">
+    <tr>
+        <td class="heading">contest name</td>
+        <td class="heading">prob Name</td>
+    </tr>
+    {% for contest_detail in cc_data_chal %}
+        <tr>
+        <td>{{ contest_detail.0 }}</td>
+        <td>
+        {% for prob in contest_detail.1 %}
+                <a href="https://www.codechef.com/{{ prob.link }}">{{ prob.name }}</a></br>
+        {% endfor %}
+        </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h3>Codeforces</h3>
+<table border="1">
+        <tr>
+        <td class="heading">contest_name</td>
+        <td class="heading">Problem index    Name</td>
+        <td class="heading">Max. points</td>
+        </tr>
+        {% for contest_detail in cf_data_chal %}
+            <tr>
+            <td>{{ contest_detail.0 }}</td>
+            <td>
+            {% for prob in contest_detail.1 %}   
+                {{ prob.index }}
+                {{ prob.name }}</br>
+            {% endfor %}
+            </td>
+            </tr>
+        {% endfor %}
+</table>
+
+
+<h3>CodeChef Practice</h3>
+<table border=1>
+    <tr>
+        <td>
+        {% for prob in cc_data_prac %}
+            <a href="www.codechef.com/{{ prob.link }}">{{ prob.name }}</a>,
+        {% endfor %}
+        </td>
+    </tr>
+</table>
+
+<h3>CodeForces Practice</h3>
+<table border="1">
+        <tr>
+        <td class="heading">Problem index    Name</td>
+        </tr>
+        {% for prob in cf_data_prac %}
+            <tr>
+                <td>{{ prob.index }},{{ prob.name }}</td>
+            </tr>
+        {% endfor %}
+</table>
+
+
+{% endblock %}

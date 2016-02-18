@@ -1,0 +1,81 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'stalkerNew/list.css' %}" />
+{% extends 'stalkerNew/base.html' %}
+<meta  content="text/html; charset=UTF-8" author="divingkite">
+
+{% block content %}
+<h4> List of people </h4>
+
+<form method="post" action = "{% url 'stalkerNew:refresh' %}">
+    {% csrf_token %}
+    <input type="submit" value = "Refresh" >
+</form>
+
+<table border="1">
+<td class="heading">NAME</td>
+<td class="heading">CODECHEF HANDLE</td>
+<td class="heading">CODEFORCES HANDLE</td>
+<td class="heading" col-span=3>OPTIONS</td>
+{% for person in people  %}
+<tr>
+	<td>{{ person.name }}</td>
+	<td>{{ person.cc }}</td>
+	<td>{{ person.cf }}</td>
+        <td><form method="post" action="{% url 'stalkerNew:remove_from_list' person.id %}">
+            {% csrf_token %}
+            <input type="submit" value="delete" class="button">             <!-- for deleting a contact -->
+            </form>
+        </td>
+        <td>    
+            <form method="post" action="{% url 'stalkerNew:profile' person.id %}">
+            {% csrf_token %}
+            <input type="submit" value="profile" class="button">
+            </form>
+        </td>
+        <td>                                                         <!-- for viewing profile of each friend -->
+            <form method="post" action="{% url 'stalkerNew:refresh_a_person' person.id %}">
+            {% csrf_token %}
+            <input type="submit" value="Refresh Profile" class="button">
+            </form> 
+        </td>
+</tr>
+{% endfor %}
+</table>
+</br>
+</br>
+{% if err_message %}
+    <h2>{{ err_message }}</h2>
+{% endif %}
+
+<form method="get"  action="{% url 'stalkerNew:add_in_list' %}">
+    <fieldset>
+    <legend>Add Contact</legend>
+        <input type="submit" value="add contact" class="button">               <!-- for adding a friend into the list -->
+    </form>
+</feildset>
+</form>
+</br>
+</br>
+{% csrf_token %}
+<FORM>
+<INPUT Type="BUTTON" Value="Codechef Contest Calender" Onclick="window.location.href='https://www.codechef.com/event-calendar'">
+</FORM>
+{% csrf_token %}
+<FORM>
+<INPUT Type="BUTTON" Value="Hackerrank Contest Calender" Onclick="window.location.href='https://www.hackerrank.com/calendar#!'">
+</FORM>
+
+</br>
+</br>
+<form method="post"  action="{% url 'stalkerNew:contest_peformance' %}">
+{% csrf_token %}
+<fieldset>
+    <legend>Search Contest</legend>
+        <input type="radio" value="CC" name="website">Codechef</br>
+        <input type="radio" value="CF" name="website">Codeforces</br>
+        <input type="submit" value="search" class="button">
+</form>
+</feildset>
+
+{% endblock %}

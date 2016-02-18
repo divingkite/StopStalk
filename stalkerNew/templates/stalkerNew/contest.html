@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'stalkerNew/contest.css' %}" />
+{% extends 'stalkerNew/base.html' %}
+
+<meta  content="text/html; charset=UTF-8" author="divingkite">
+{% block content %}
+<form method="post" action= "{% url  'stalkerNew:list_for_a_contest' %}" >
+{% csrf_token %}
+<select name="con">
+	    <option value="" disabled="disabled" selected="selected">Please select a contest</option>
+        {% for contest in contests %}
+            <option value= "{{ contest.name }}" name="Contest">{{ contest.name }}</option>     
+        {% endfor %}
+</select>
+
+<input type="submit" value="GO"  >
+</form>
+{% endblock %}
+
