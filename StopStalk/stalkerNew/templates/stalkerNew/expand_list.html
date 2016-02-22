@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'stalkerNew/expand.css' %}" />
+
+{% extends 'stalkerNew/base.html' %}
+<meta  content="text/html; charset=UTF-8" author="divingkite">
+
+{% block content %}
+<h5><strong>Enter Your Credentials</strong></h5>
+
+{% if error_message %}<h4><strong>{{error_message}}</strong></h4>{% endif %} 
+
+<form method="post" action=".">
+{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Add Contact">
+</form>
+{% endblock %}

@@ -1,0 +1,4 @@
+on delete= models.cascade
+sending e-mail for verification.
+add other socail site links for registering
+

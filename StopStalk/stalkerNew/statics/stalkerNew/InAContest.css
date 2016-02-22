@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    empty-cells: show;
+    padding: 15px;
+}
+tr:hover
+{ background-color: #f5f5f5;
+}
+.heading {
+    background-color: #4CAF50;
+    color: white;
+}
+tr{
+color : #000000;
+background-color : #ccff99;
+}
+td {
+    height: 30px;
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}

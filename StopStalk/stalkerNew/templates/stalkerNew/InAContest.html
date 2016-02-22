@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'stalkerNew/InAcontest.css' %}" />
+
+{% extends 'stalkerNew/base.html' %}
+<meta  content="text/html; charset=UTF-8" author="divingkite">
+
+<h3 class='heading'>In a Contest</h3>
+{% block content %}
+    <body>
+        <table border="1">
+            <tr>
+    	       <td class="heading">Name</td>
+    	       <td class="heading">Questions</td>
+            </tr>
+            {% for person,questions in all_questions.items %}
+            <tr>
+        	   <td>{{ person.name }}</td>
+               <td>
+        	    {% for question in questions %}
+        	        {{ question }}</br>
+        	    {% endfor %}
+                </td>
+             </tr>
+            {% endfor %} 
+        </table>
+    </body>
+{% endblock %}
