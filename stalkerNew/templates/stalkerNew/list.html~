@@ -1,0 +1,111 @@
+{% load static %}
+<html>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+
+
+<style>
+table {
+    width: 100%;
+    empty-cells: show;
+    padding: 15px;
+}
+tr:hover
+{ background-color: #f5f5f5;
+}
+.heading {
+    background-color: #4CAF50;
+    color: white;
+}
+tr{
+color : #000000;
+background-color : #ccff99;
+}
+td {
+    height: 30px;
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+} 
+.button
+{
+background-color: #E3E1B8;
+padding: 2px 4px;
+font: 13px sans-serif;
+text-decoration: none;
+border: 1px solid #000;
+
+border-color: #aaa #444 #444 #aaa;
+color: #000;
+}
+a{
+color: #03E1B8;
+padding :4px;
+font: 13px sans-serif;
+text-decoration: none;
+}
+</style>
+
+<h4> List of people </h4>
+
+<table border="1">
+<td class="heading">NAME</td>
+<td class="heading">CODECHEF HANDLE</td>
+<td class="heading">CODEFORCES HANDLE</td>
+{% for person in people  %}
+<tr>
+	<td>{{ person.name }}</td>
+	<td>{{ person.cc }}</td>
+	<td>{{ person.cf }}</td>
+        <td><form method="post" action="{% url 'stalker:remove_from_list' person.id %}">
+            {% csrf_token %}
+            <input type="submit" value="delete" class="button">             <!-- for deleting a contact -->
+            </form>
+        </td>
+        <td>    
+            <form method="post" action="{% url 'stalker:profile' person.id %}">
+            {% csrf_token %}
+            <input type="submit" value="profile" class="button">
+            </form>                                    <!-- for viewing profile of each friend -->
+        </td>
+</tr>
+{% endfor %}
+</table>
+</br>
+</br>
+<form method="post"  action="{% url 'stalker:add_in_list' %}">
+{% csrf_token %}
+<fieldset>
+    <legend>Add Contact</legend>
+        <input type="text" name="friend_name" placeholder="Name">
+        <input type="text" name="codechef_handle" placeholder="codechef handle name">
+        <input type="text" name="codeforces_handle" placeholder="codeforces handle name">
+        <input type="submit" value="add contact" class="button">                 <!-- for adding a friend into the list -->
+</feildset>
+</form>
+</br>
+</br>
+{% csrf_token %}
+<FORM>
+<INPUT Type="BUTTON" Value="Codechef Contest Calender" Onclick="window.location.href='https://www.codechef.com/event-calendar'">
+</FORM>
+{% csrf_token %}
+<FORM>
+<INPUT Type="BUTTON" Value="Hackerrank Contest Calender" Onclick="window.location.href='https://www.hackerrank.com/calendar#!'">
+</FORM>
+
+</br>
+</br>
+<form method="post"  action="{% url 'stalker:contest_peformance' %}">
+{% csrf_token %}
+<fieldset>
+    <legend>Search Contest</legend>
+        <input type="radio" value="codechef" name="website">Codechef</br>
+        <input type="radio" value="codeforces" name="website">Codeforces</br>
+        <input type="submit" value="search" class="button">                 <!-- for adding a friend into the list -->
+</feildset>
+
+
+</form>
+
+<html>

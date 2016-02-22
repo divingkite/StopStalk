@@ -1,0 +1,29 @@
+from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
+from . import views
+from django.conf.urls import patterns, include
+import django.contrib.auth
+
+#for stalker
+
+application_name = 'stalker2'
+
+urlpatterns = [
+              url(r'^logout/$', views.logout_page,name='logout'),
+              url(r'^login/$',views.login,name='login' ), # If user is not login it will redirect to login page
+              url(r'^register/$', views.register,name="registration"),
+              url(r'^home/$', views.home),
+
+              url( r'^friend_list/$' , views.list_ , name = 'friend_list'),  #here we can view and add and delete a person name  
+              url(r'^profile/codechef/(?P<person_id>[0-9]+)/$', views.profile , name='codechef_profile'),  # view profile of a person both cc anf cf
+              url(r'^profile/codeforces/(?P<person_id>[0-9]+)/$', views.profile , name='codeforces_profile'),
+              url( r'^expand_list/$' , views.expand_list , name = 'add_in_list'), # add a person in the list of friends
+              url( r'^delete_list/(?P<person_id>[0-9]+)/$' , views.delete_contact , name = 'remove_from_list'), # remove a person in the list of friends
+              
+              url( r'^search_contest/$', views.search_contestwise ,name='contest_peformance' ), #shows performance of people in a particular contest
+              
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+ 

@@ -1,0 +1,85 @@
+<!---a dictionary of { contest_id : list }
+                                    #each element of the list contains a list containing prob. index,name,maxmum points obtainable,points obtained and 0 if practice and 1 if contest ques.
+
+write code for practice prob, make change in doeverything and practice prob in external functions
+-->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+
+<style>
+table {
+    width: 100%;
+    empty-cells: show;
+    padding: 15px;
+}
+tr:hover
+{ background-color: #f5f5f5;
+}
+.heading {
+    background-color: #4CAF50;
+    color: white;
+}
+td {
+    height: 30px;
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+tr{
+color : ;
+background-color : #ffff66;
+}
+.button
+{
+background-color: #E3E1B8;
+padding: 2px 4px;
+font: 13px sans-serif;
+text-decoration: none;
+border: 1px solid #000;
+border-color: #aaa #444 #444 #aaa;
+color: #000;
+}
+a{ color : #093445;
+}
+</style>
+
+
+<h3>Codechef</h3>
+
+<table border="1">
+    <tr>
+        <td class="heading">contest name</td>
+        <td class="heading">prob Name</td>
+    </tr>
+    {% for contest,probs in cc_data.chal_prob.items %}
+        <tr>
+        <td>{{ contest }}</td>
+        <td>
+        {% for prob in probs %}
+                <a href="www.codechef.com/{{ prob.0 }}">{{ prob.1 }}</a></br>
+        {% endfor %}
+        </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h3>Codeforces</h3>
+<table border="1">
+        <tr>
+        <td class="heading">contest_id</td>
+        <td class="heading">Problem index    Name</td>
+        <td class="heading">Max. points</td>
+        </tr>
+        {% for contest,probs in cf_data.chall_prob.items %}
+            <tr>
+            <td>{{ contest }}</td>
+            <td>
+            {% for prob in probs %}   
+                {{ prob.index }}
+                {{ prob.name }}</br>
+            {% endfor %}
+            </td>
+            </tr>
+        {% endfor %}
+</table>
